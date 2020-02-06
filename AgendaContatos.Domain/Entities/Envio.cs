@@ -1,10 +1,9 @@
-﻿using System;
+﻿using AgendaContatos.Domain.Entities.Base;
 
 namespace AgendaContatos.Domain.Entities
 {
-    public class Envio
+    public class Envio: EntityBase
     {
-        public Guid IdEnvio { get; set; }
         public Campanha Campanha { get; set; }
         public Grupo Grupo { get; set; }
         public Contato Contato { get; set; }

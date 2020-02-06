@@ -1,10 +1,9 @@
-﻿using System;
+﻿using AgendaContatos.Domain.Entities.Base;
 
 namespace AgendaContatos.Domain.Entities
 {
-    public class Usuario
+    public class Usuario: EntityBase
     {
-        public Guid IdUsuario { get; set; }
         public string PrimeiroNome { get; set; }
         public string UltimoNome { get; set; }
         public string Senha { get; set; }
