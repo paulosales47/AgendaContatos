@@ -9,10 +9,10 @@ namespace AgendaContatos.Domain.Commands.Usuario.AdicionarUsuario
 {
     public class AdicionarUsuarioHandler : IRequestHandler<AdicionarUsuarioRequest, Response>
     {
-        public Task<Response> Handle(AdicionarUsuarioRequest request, CancellationToken cancellationToken)
+        public async Task<Response> Handle(AdicionarUsuarioRequest request, CancellationToken cancellationToken)
         {
+            return null;
 
-            throw new NotImplementedException();
         }
     }
 }
