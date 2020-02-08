@@ -2,10 +2,8 @@
 using FluentValidation;
 using FluentValidation.Results;
 using MediatR;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -29,8 +27,9 @@ namespace AgendaContatos.Domain.PipelineBehavior
                 .Where(f => f != null)
                 .ToList();
 
-            
-            return failures.Any() ? Errors(failures) : next();
+            return failures.Any()
+                ? Errors(failures)
+                : next();
         }
 
         private Task<TResponse> Errors(List<ValidationFailure> failures)
@@ -39,7 +38,7 @@ namespace AgendaContatos.Domain.PipelineBehavior
 
             foreach (var failure in failures)
             {
-                
+                response.AdicionarNotificacao(failure.ErrorCode, failure.ErrorMessage);
             }
 
             return Task.FromResult(response as TResponse);

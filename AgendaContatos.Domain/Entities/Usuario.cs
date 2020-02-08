@@ -8,5 +8,15 @@ namespace AgendaContatos.Domain.Entities
         public string UltimoNome { get; set; }
         public string Senha { get; set; }
         public string Email { get; set; }
+
+        public Usuario() { }
+
+        public Usuario(string primeiroNome, string ultimoNome, string senha, string email)
+        {
+            PrimeiroNome = primeiroNome;
+            UltimoNome = ultimoNome;
+            Senha = senha;
+            Email = email;
+        }
     }
 }
