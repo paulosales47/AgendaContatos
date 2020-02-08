@@ -12,10 +12,12 @@ namespace AgendaContatos.Domain.Commands.Usuario.AdicionarUsuario
     public class AdicionarUsuarioHandler : IRequestHandler<AdicionarUsuarioRequest, Response>
     {
         private readonly IRepositoryUsuario _repositoryUsuario;
+        private readonly IMediator _mediator;
 
-        public AdicionarUsuarioHandler(IRepositoryUsuario repositoryUsuario)
+        public AdicionarUsuarioHandler(IRepositoryUsuario repositoryUsuario, IMediator mediator)
         {
             _repositoryUsuario = repositoryUsuario;
+            _mediator = mediator;
         }
 
         public async Task<Response> Handle(AdicionarUsuarioRequest request, CancellationToken cancellationToken)
@@ -33,8 +35,10 @@ namespace AgendaContatos.Domain.Commands.Usuario.AdicionarUsuario
                 senha: request.Senha);
 
             await _repositoryUsuario.Adicionar(usuario).ConfigureAwait(false);
-            
-            return response;
+
+            await _mediator.Publish(new AdicionarUsuarioNotification(usuario)).ConfigureAwait(false);
+
+            return await Task.FromResult(response).ConfigureAwait(false);
         }
 
         private async Task<bool> EmailExistente(AdicionarUsuarioRequest request)

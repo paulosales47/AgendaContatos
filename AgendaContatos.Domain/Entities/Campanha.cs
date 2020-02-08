@@ -5,7 +5,7 @@ using System.Text;
 
 namespace AgendaContatos.Domain.Entities
 {
-    public class Campanha: EntityBase
+    internal class Campanha: EntityBase
     {
         public string Nome { get; set; }
         public Usuario Usuario { get; set; }

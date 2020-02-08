@@ -3,7 +3,7 @@ using AgendaContatos.Domain.Enums;
 
 namespace AgendaContatos.Domain.Entities
 {
-    public class Contato: EntityBase
+    internal class Contato: EntityBase
     {
         public string Nome { get; set; }
         public string Telefone { get; set; }

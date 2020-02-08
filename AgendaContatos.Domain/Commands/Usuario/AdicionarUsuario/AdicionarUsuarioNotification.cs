@@ -1,12 +1,15 @@
 ﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace AgendaContatos.Domain.Commands.Usuario.AdicionarUsuario
 {
-    public class AdicionarUsuarioNotification: INotification
+    internal class AdicionarUsuarioNotification: INotification
     {
+        public AdicionarUsuarioNotification(Entities.Usuario usuario)
+        {
+            Usuario = usuario;
+        }
+
+        public Entities.Usuario Usuario { get; private set; }
 
     }
 }

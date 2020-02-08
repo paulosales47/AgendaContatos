@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace AgendaContatos.Domain.Validator
 {
-    public class AdicionarUsuarioValidator : AbstractValidator<AdicionarUsuarioRequest>
+    internal class AdicionarUsuarioValidator : AbstractValidator<AdicionarUsuarioRequest>
     {
         public AdicionarUsuarioValidator()
         {
