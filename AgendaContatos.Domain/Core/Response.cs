@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using AgendaContatos.Domain.Commands;
+using System.Collections.Generic;
 using System.Linq;
 
-namespace AgendaContatos.Domain.Commands
+namespace AgendaContatos.Domain.Core
 {
     public class Response
     {
@@ -14,6 +15,12 @@ namespace AgendaContatos.Domain.Commands
         public Response()
         {
             _notificacoes = new List<Notification>();
+        }
+
+        public Response(object resposta)
+        {
+            _notificacoes = new List<Notification>();
+            Resposta = resposta;
         }
 
         public void AdicionarNotificacao(Notification notificacao) 

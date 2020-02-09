@@ -1,9 +1,9 @@
 ﻿using AgendaContatos.Domain.Commands.Usuario.AdicionarUsuario;
 using FluentValidation;
 
-namespace AgendaContatos.Domain.Validator
+namespace AgendaContatos.Domain.Commands.Usuario.Validator
 {
-    internal class AdicionarUsuarioValidator : AbstractValidator<AdicionarUsuarioRequest>
+    public class AdicionarUsuarioValidator : AbstractValidator<AdicionarUsuarioRequest>
     {
         public AdicionarUsuarioValidator()
         {
@@ -17,6 +17,7 @@ namespace AgendaContatos.Domain.Validator
 
             RuleFor(a => a.Senha)
                 .NotEmpty()
+                .WithMessage("Necessário informar a senha")
                 .Length(8, 16)
                 .WithMessage("A senha deve ter de 8 a 16 caracteres");
 

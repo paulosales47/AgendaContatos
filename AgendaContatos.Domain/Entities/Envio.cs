@@ -2,7 +2,7 @@
 
 namespace AgendaContatos.Domain.Entities
 {
-    internal class Envio: EntityBase
+    public class Envio: EntityBase
     {
         public Campanha Campanha { get; set; }
         public Grupo Grupo { get; set; }

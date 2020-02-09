@@ -1,22 +1,20 @@
-﻿using AgendaContatos.Domain.Interfaces.Repositories;
+﻿using AgendaContatos.Domain.Commands.Usuario.AdicionarUsuario;
+using AgendaContatos.Domain.Core;
+using AgendaContatos.Domain.Interfaces.Repositories;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using AgendaContatos.Domain.Entities;
 
-namespace AgendaContatos.Domain.Commands.Usuario.AdicionarUsuario
+namespace AgendaContatos.Domain.Handlers.Usuario.AdicionarUsuario
 {
     public class AdicionarUsuarioHandler : IRequestHandler<AdicionarUsuarioRequest, Response>
     {
-        private readonly IRepositoryUsuario _repositoryUsuario;
+        private readonly IUsuarioRepository _usuarioRepository;
         private readonly IMediator _mediator;
 
-        public AdicionarUsuarioHandler(IRepositoryUsuario repositoryUsuario, IMediator mediator)
+        public AdicionarUsuarioHandler(IUsuarioRepository usuarioRepository, IMediator mediator)
         {
-            _repositoryUsuario = repositoryUsuario;
+            _usuarioRepository = usuarioRepository;
             _mediator = mediator;
         }
 
@@ -34,16 +32,16 @@ namespace AgendaContatos.Domain.Commands.Usuario.AdicionarUsuario
                 email: request.Email,
                 senha: request.Senha);
 
-            await _repositoryUsuario.Adicionar(usuario).ConfigureAwait(false);
+            await _usuarioRepository.Adicionar(usuario).ConfigureAwait(false);
 
             await _mediator.Publish(new AdicionarUsuarioNotification(usuario)).ConfigureAwait(false);
 
-            return await Task.FromResult(response).ConfigureAwait(false);
+            return await Task.FromResult(new Response("Usuário adicionado com sucesso")).ConfigureAwait(false);
         }
 
         private async Task<bool> EmailExistente(AdicionarUsuarioRequest request)
         {
-            return await _repositoryUsuario.ExisteRegistro(u => u.Email.Equals(request.Email)).ConfigureAwait(false);
+            return await _usuarioRepository.ExisteRegistro(u => u.Email.Equals(request.Email)).ConfigureAwait(false);
         }
     }
 }

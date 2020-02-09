@@ -1,7 +1,5 @@
-﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using AgendaContatos.Domain.Core;
+using MediatR;
 
 namespace AgendaContatos.Domain.Commands.Usuario.AdicionarUsuario
 {
@@ -18,6 +16,11 @@ namespace AgendaContatos.Domain.Commands.Usuario.AdicionarUsuario
             UltimoNome = ultimoNome;
             Senha = senha;
             Email = email;
+        }
+
+        public AdicionarUsuarioRequest()
+        {
+
         }
     }
 }

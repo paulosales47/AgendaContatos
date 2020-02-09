@@ -1,5 +1,4 @@
-﻿using AgendaContatos.Domain.Commands;
-using FluentValidation;
+﻿using FluentValidation;
 using FluentValidation.Results;
 using MediatR;
 using System.Collections.Generic;
@@ -7,19 +6,19 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AgendaContatos.Domain.PipelineBehavior
+namespace AgendaContatos.Domain.Core
 {
-    public class FailFastRequestBehavior<TRequst, TResponse> : IPipelineBehavior<TRequst, TResponse>
-        where TRequst : IRequest<TResponse> where TResponse : Response
+    public class FailFastRequestBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+        where TRequest : IRequest<TResponse> where TResponse : Response
     {
         private readonly IEnumerable<IValidator> _validators;
 
-        public FailFastRequestBehavior(IEnumerable<IValidator<TRequst>> validators)
+        public FailFastRequestBehavior(IEnumerable<IValidator<TRequest>> validators)
         {
             _validators = validators;
         }
 
-        public Task<TResponse> Handle(TRequst request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
+        public Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
         {
             var failures = _validators
                 .Select(v => v.Validate(request))

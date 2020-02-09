@@ -4,5 +4,5 @@ using System;
 
 namespace AgendaContatos.Domain.Interfaces.Repositories
 {
-    public interface IRepositoryUsuario: IRepositoryBase<Usuario, Guid> { }
+    public interface IUsuarioRepository: IRepositoryBase<Usuario, Guid> { }
 }
