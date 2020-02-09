@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AgendaContatos.Domain.Handlers.Usuario.AdicionarUsuario.Notifications
 {
-    internal class EnviaEmailAtivacaoUsuario : INotificationHandler<AdicionarUsuarioNotification>
+    public class EnviaEmailAtivacaoUsuario : INotificationHandler<AdicionarUsuarioNotification>
     {
         public async Task Handle(AdicionarUsuarioNotification notification, CancellationToken cancellationToken)
         {

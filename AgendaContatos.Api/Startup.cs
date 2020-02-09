@@ -1,17 +1,15 @@
 using AgendaContatos.Domain.Core;
-using AgendaContatos.Domain.Entities;
-using AgendaContatos.Domain.Interfaces.Repositories;
-using AgendaContatos.Repository;
+using AgendaContatos.Infra.Repositories;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System;
-using System.Reflection;
 
 namespace AgendaContatos.Api
 {
@@ -29,7 +27,11 @@ namespace AgendaContatos.Api
             services.AddApiVersioning();
             
             services.AddControllers();
-            
+
+            services.AddDbContext<AgendaContatoContext>(options =>
+                options.UseMySql(Configuration.GetConnectionString("ConnectionMySql"))
+            );
+
             ConfigurarIoc(services);
 
             ConfigurarMediatR(services);
@@ -41,7 +43,7 @@ namespace AgendaContatos.Api
 
         private void ConfigurarIoc(IServiceCollection services)
         {
-            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            //services.AddScoped<IUsuarioRepository, UsuarioRepository>();
         }
 
         private static void ConfigurarMediatR(IServiceCollection services)

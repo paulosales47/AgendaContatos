@@ -2,7 +2,7 @@
 
 namespace AgendaContatos.Domain.Commands.Usuario.AdicionarUsuario
 {
-    internal class AdicionarUsuarioNotification: INotification
+    public class AdicionarUsuarioNotification: INotification
     {
         public AdicionarUsuarioNotification(Entities.Usuario usuario)
         {

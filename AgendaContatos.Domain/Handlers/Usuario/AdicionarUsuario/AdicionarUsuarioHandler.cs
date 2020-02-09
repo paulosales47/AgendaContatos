@@ -21,7 +21,7 @@ namespace AgendaContatos.Domain.Handlers.Usuario.AdicionarUsuario
         public async Task<Response> Handle(AdicionarUsuarioRequest request, CancellationToken cancellationToken)
         {
             var response = new Response();
-            bool emailExistente = await EmailExistente(request).ConfigureAwait(false);
+            bool emailExistente = EmailExistente(request);
 
             if (emailExistente)
                 response.AdicionarNotificacao("E-mail cadastrado", "O e-mail informado já está sendo utilizado");
@@ -32,16 +32,16 @@ namespace AgendaContatos.Domain.Handlers.Usuario.AdicionarUsuario
                 email: request.Email,
                 senha: request.Senha);
 
-            await _usuarioRepository.Adicionar(usuario).ConfigureAwait(false);
+            _usuarioRepository.Adicionar(usuario);
 
             await _mediator.Publish(new AdicionarUsuarioNotification(usuario)).ConfigureAwait(false);
 
             return await Task.FromResult(new Response("Usuário adicionado com sucesso")).ConfigureAwait(false);
         }
 
-        private async Task<bool> EmailExistente(AdicionarUsuarioRequest request)
+        private bool EmailExistente(AdicionarUsuarioRequest request)
         {
-            return await _usuarioRepository.ExisteRegistro(u => u.Email.Equals(request.Email)).ConfigureAwait(false);
+            return _usuarioRepository.ExisteRegistro(u => u.Email.Equals(request.Email));
         }
     }
 }

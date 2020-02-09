@@ -4,7 +4,7 @@ using System;
 
 namespace AgendaContatos.Domain.Entities
 {
-    public class Usuario: EntityBase
+    public class Usuario : EntityBase
     {
         public string PrimeiroNome { get; private set; }
         public string UltimoNome { get; private set; }
