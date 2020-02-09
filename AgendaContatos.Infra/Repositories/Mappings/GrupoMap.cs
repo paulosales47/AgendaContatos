@@ -12,8 +12,6 @@ namespace AgendaContatos.Infra.Repositories.Mappings
             builder.HasKey(u => u.Id);
             builder.Property(u => u.Nome).HasMaxLength(150).IsRequired();
             builder.Property(u => u.Nicho).IsRequired();
-
-            builder.HasOne(u => u.Usuario).WithMany().HasForeignKey("ID_USUARIO");
         }
     }
 }

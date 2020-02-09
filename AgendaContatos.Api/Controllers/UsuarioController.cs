@@ -19,7 +19,7 @@ namespace AgendaContatos.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AdicionarUsuario([FromBody] AdicionarUsuarioRequest command) 
+        public async Task<IActionResult> AdicionarUsuario([FromBody] AdicionarUsuarioRequest command)
         {
             var response = await _mediator.Send(command).ConfigureAwait(false);
 

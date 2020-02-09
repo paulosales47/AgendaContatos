@@ -6,27 +6,15 @@ namespace AgendaContatos.Infra.Repositories
 {
     public partial class AgendaContatoContext: DbContext
     {
-        public DbSet<Campanha> Campanha { get; set; }
         public DbSet<Usuario> Usuario { get; set; }
-        public DbSet<Envio> Envio { get; set; }
         public DbSet<Grupo> Grupo { get; set; }
-        public DbSet<Contato> Contato { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured) 
-            {
-                
-            }
-
-            base.OnConfiguring(optionsBuilder);
-        }
+        
+        public AgendaContatoContext(DbContextOptions<AgendaContatoContext> options) : base(options)
+        { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new CampanhaMap());
-            modelBuilder.ApplyConfiguration(new ContatoMap());
-            modelBuilder.ApplyConfiguration(new EnvioMap());
+            modelBuilder.ApplyConfiguration(new GrupoUsuarioMap());
             modelBuilder.ApplyConfiguration(new GrupoMap());
             modelBuilder.ApplyConfiguration(new UsuarioMap());
 

@@ -1,4 +1,5 @@
 using AgendaContatos.Domain.Core;
+using AgendaContatos.Domain.Interfaces.Repositories;
 using AgendaContatos.Infra.Repositories;
 using FluentValidation;
 using MediatR;
@@ -25,7 +26,7 @@ namespace AgendaContatos.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddApiVersioning();
-            
+
             services.AddControllers();
 
             services.AddDbContext<AgendaContatoContext>(options =>
@@ -43,13 +44,13 @@ namespace AgendaContatos.Api
 
         private void ConfigurarIoc(IServiceCollection services)
         {
-            //services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
         }
 
         private static void ConfigurarMediatR(IServiceCollection services)
         {
             var assembly = AppDomain.CurrentDomain.Load("AgendaContatos.Domain");
-            
+
             AssemblyScanner
                 .FindValidatorsInAssembly(assembly)
                 .ForEach(result => services.AddScoped(result.InterfaceType, result.ValidatorType));
